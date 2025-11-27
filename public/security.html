@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DIF – Security</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+</head>
+
+<body class="bg-white min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-6 py-6">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-black">DIF</h1>
+            <p class="text-sm text-gray-600">Digital Identity Firewall</p>
+          </div>
+        </a>
+        <a href="view.html" class="text-sm text-gray-600 hover:text-black transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Identity
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    
+    <!-- Page Title -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-black mb-2">Security & Passkeys</h2>
+      <p class="text-gray-600">Manage your identity security and biometric authentication</p>
+    </div>
+
+    <!-- Identity Info Card -->
+    <section id="identityBox" class="mb-6 bg-white border-2 border-gray-200 rounded-xl p-8 shadow-sm">
+      <div class="flex items-center justify-center py-4">
+        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-black mr-3"></div>
+        <p class="text-gray-600">Loading identity...</p>
+      </div>
+    </section>
+
+    <!-- Passkey Setup Card -->
+    <section class="bg-white border-2 border-gray-200 rounded-xl p-8 shadow-sm">
+      
+      <!-- Header -->
+      <div class="flex items-start gap-4 mb-6 pb-6 border-b border-gray-200">
+        <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-xl font-bold text-black mb-2">Generate Phone Passkey</h3>
+          <p class="text-sm text-gray-600">
+            Link your DIF identity to a fingerprint passkey on your mobile device for secure biometric authentication.
+          </p>
+        </div>
+      </div>
+
+      <!-- Setup Button -->
+      <div class="mb-6">
+        <button id="startBtn"
+          class="w-full px-6 py-4 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 group">
+          <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+          </svg>
+          <span>Start Passkey Setup</span>
+        </button>
+      </div>
+
+      <!-- Status Message -->
+      <div id="statusMsg" class="empty:hidden p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p class="text-sm text-blue-900 font-medium"></p>
+        </div>
+      </div>
+
+      <!-- QR Code Section -->
+      <div id="qrContainer" class="hidden mt-6 pt-6 border-t border-gray-200">
+        <div class="text-center">
+          <p class="text-sm font-semibold text-black uppercase tracking-wide mb-4">Scan with Your Phone</p>
+          <div class="inline-block bg-white p-4 rounded-xl border-2 border-gray-200 shadow-sm">
+            <canvas id="qrCanvas"></canvas>
+          </div>
+          <p class="mt-4 text-xs text-gray-500">Open your camera app and point it at the QR code</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Info Card -->
+    <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-black mb-1">Secure Biometric Authentication</p>
+          <p class="text-xs text-gray-600">Your identity data is encrypted and stored securely. Passkeys use your device's biometric authentication for maximum security.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 mt-16">
+    <div class="max-w-5xl mx-auto px-6 py-6">
+      <p class="text-sm text-gray-500 text-center">Secure identity management powered by DIF</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { db, uploadEncryptedFingerprint } from "./firebase-config.js";
+    import {
+      ref, set
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const NGROK_URL = "https://vaporous-merri-transseptal.ngrok-free.dev";
+
+    // IndexedDB helper
+    function openDB() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open("DIF_DB", 1);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains("identity"))
+            db.createObjectStore("identity", { keyPath: "id" });
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function getLocalIdentity() {
+      const db = await openDB();
+      return new Promise((resolve) => {
+        const tx = db.transaction("identity", "readonly");
+        const store = tx.objectStore("identity");
+        const req = store.get("default");
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    // Fake encryption for demo
+    function encryptIdentity(identity) {
+      return {
+        alg: "demo-base64",
+        ciphertext: btoa(JSON.stringify(identity)),
+        createdAt: Date.now()
+      };
+    }
+
+    const identityBox = document.getElementById("identityBox");
+    const startBtn = document.getElementById("startBtn");
+    const statusMsg = document.getElementById("statusMsg");
+    const qrContainer = document.getElementById("qrContainer");
+    const qrCanvas = document.getElementById("qrCanvas");
+
+    let currentIdentity = null;
+
+    (async () => {
+      currentIdentity = await getLocalIdentity();
+      if (!currentIdentity) {
+        identityBox.innerHTML = `
+          <div class="text-center py-4">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </div>
+            <p class="text-lg font-semibold text-red-600 mb-2">No Identity Found</p>
+            <p class="text-sm text-gray-600">Please create an identity first before setting up passkeys.</p>
+          </div>
+        `;
+        startBtn.disabled = true;
+        return;
+      }
+
+      identityBox.innerHTML = `
+        <div class="flex items-start gap-6">
+          <div class="w-16 h-16 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-xs font-semibold text-green-700 uppercase tracking-wide">Current Identity</span>
+            </div>
+            <div class="space-y-2">
+              <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Full Name</p>
+                <p class="text-base font-semibold text-black">${currentIdentity.fullName}</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Username</p>
+                <p class="text-base font-medium text-black">@${currentIdentity.username}</p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Public Fingerprint</p>
+                <p class="text-sm font-mono text-gray-700 break-all">${currentIdentity.publicFP}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    })();
+
+    startBtn.addEventListener("click", async () => {
+      startBtn.disabled = true;
+      statusMsg.innerHTML = `
+        <div class="flex items-start gap-3">
+          <svg class="animate-spin h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          <p class="text-sm text-blue-900 font-medium">Starting QR session...</p>
+        </div>
+      `;
+      statusMsg.classList.remove('empty:hidden');
+
+      const resp = await fetch(`${NGROK_URL}/qr/start`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: currentIdentity.username,
+          publicFP: currentIdentity.publicFP
+        })
+      });
+
+      const data = await resp.json();
+      const mobileURL = data.mobile_url;
+      const sessionId = data.session_id;
+
+      qrContainer.classList.remove("hidden");
+      new QRious({
+        element: qrCanvas,
+        size: 220,
+        value: mobileURL
+      });
+
+      statusMsg.innerHTML = `
+        <div class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+          <p class="text-sm text-blue-900 font-medium">Scan the QR code on your phone to register passkey...</p>
+        </div>
+      `;
+
+      const interval = setInterval(async () => {
+        const check = await fetch(`${NGROK_URL}/qr/status/${sessionId}`);
+        const info = await check.json();
+
+        if (info.status === "registered") {
+          clearInterval(interval);
+          statusMsg.innerHTML = `
+            <div class="flex items-start gap-3">
+              <svg class="animate-spin h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              <p class="text-sm text-blue-900 font-medium">Passkey registered. Uploading encrypted identity...</p>
+            </div>
+          `;
+
+          let encrypted = encryptIdentity(currentIdentity);
+          await uploadEncryptedFingerprint(currentIdentity.username, encrypted);
+
+          await set(ref(db, "dif_by_fp/" + currentIdentity.publicFP), {
+            username: currentIdentity.username
+          });
+
+          statusMsg.className = "p-4 bg-green-50 border border-green-200 rounded-lg";
+          statusMsg.innerHTML = `
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div>
+                <p class="text-sm text-green-900 font-semibold mb-1">Setup Complete!</p>
+                <p class="text-xs text-green-700">Identity stored in Firebase securely. You can now use your passkey for authentication.</p>
+              </div>
+            </div>
+          `;
+        }
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
