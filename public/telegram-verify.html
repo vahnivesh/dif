@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DIF Telegram Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white min-h-screen">
+
+   <!-- Header -->
+  <header class="border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-6 py-6">
+      <div class="flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-black">DIF</h1>
+            <p class="text-sm text-gray-600">Digital Identity Firewall</p>
+          </div>
+        </a>
+        <a href="verify.html" class="text-sm text-gray-600 hover:text-black transition-colors flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Verify
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto px-6 py-12">
+    
+    <!-- Page Title -->
+    <div class="mb-8 text-center">
+      <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.121.099.155.232.171.325.016.093.036.305.02.469z"/>
+        </svg>
+      </div>
+      <h2 class="text-3xl font-bold text-black mb-2">Verify Telegram Account</h2>
+      <p class="text-gray-600">Generate a verification code for your Telegram profile</p>
+    </div>
+
+    <!-- Instructions -->
+    <div class="mb-6 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200">
+      <h3 class="text-sm font-semibold text-blue-900 mb-3 flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        How It Works
+      </h3>
+      <ol class="space-y-2 text-sm text-blue-800">
+        <li class="flex gap-2">
+          <span class="font-semibold">1.</span>
+          <span>Enter your Telegram username below</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="font-semibold">2.</span>
+          <span>Click "Generate Code" to create a unique verification code</span>
+        </li>
+        <li class="flex gap-2">
+          <span class="font-semibold">3.</span>
+          <span>Send the code to @DIF_verify_bot</span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Verification Card -->
+    <div class="bg-white border-2 border-gray-200 rounded-xl p-8 shadow-sm mb-6">
+      
+      <!-- Input Field -->
+      <div class="mb-6">
+        <label class="block mb-2">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.121.099.155.232.171.325.016.093.036.305.02.469z"/>
+            </svg>
+            <span class="text-sm font-semibold text-black uppercase tracking-wide">Telegram Username</span>
+          </div>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">@</span>
+            <input 
+              id="username"
+              type="text"
+              class="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-600 focus:outline-none transition-colors text-black placeholder-gray-400" 
+              placeholder="your_telegram_username"
+            />
+          </div>
+        </label>
+      </div>
+
+      <!-- Generate Button -->
+      <button 
+        onclick="generate()"
+        class="w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-lg flex items-center justify-center gap-2 group">
+        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>Generate Code</span>
+      </button>
+
+      <!-- Output Message -->
+      <div id="output" class="empty:hidden mt-6"></div>
+
+    </div>
+
+    <!-- Security Notice -->
+    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-black mb-1">Secure Verification</p>
+          <p class="text-xs text-gray-600">Your verification code is unique and can only be used once. Keep it secure and only share it with the official DIF Telegram bot.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 mt-16">
+    <div class="max-w-5xl mx-auto px-6 py-6">
+      <p class="text-sm text-gray-500 text-center">Secure identity management powered by DIF</p>
+    </div>
+  </footer>
+
+  <script>
+
+    // Start polling the bot verification status
+    function startChecking(username) {
+      const api = "https://vaporous-merri-transseptal.ngrok-free.dev/status?username=" + username;
+
+      const interval = setInterval(() => {
+        fetch(api)
+          .then(r => r.json())
+          .then(data => {
+            if (data.verified === true) {
+              clearInterval(interval);
+              window.location.href = "telegram-success.html?user=" + username;
+            }
+          })
+          .catch(err => console.error(err));
+      }, 1500);
+    }
+
+
+    function generate() {
+      let username = document.getElementById("username").value.trim();
+      const outputDiv = document.getElementById("output");
+      
+      if (!username) {
+        outputDiv.className = "mt-6 p-4 bg-red-50 border border-red-200 rounded-lg";
+        outputDiv.innerHTML = `
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <p class="text-sm text-red-900 font-medium">Please enter your Telegram username</p>
+          </div>
+        `;
+        return;
+      }
+
+      if (username.startsWith("@")) username = username.slice(1);
+
+      outputDiv.className = "mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg";
+      outputDiv.innerHTML = `
+        <div class="flex items-start gap-3">
+          <svg class="animate-spin h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          <p class="text-sm text-blue-900 font-medium">Generating verification code...</p>
+        </div>
+      `;
+
+      const api = "https://vaporous-merri-transseptal.ngrok-free.dev/generate?username=" + encodeURIComponent(username);
+
+      fetch(api)
+        .then(res => {
+          if (!res.ok) throw new Error("Network error");
+          return res.text();
+        })
+        .then(code => {
+
+          outputDiv.className = "mt-6 p-4 bg-green-50 border border-green-200 rounded-lg";
+          outputDiv.innerHTML = `
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                  <p class="text-sm text-green-900 font-semibold mb-2">Code Generated Successfully!</p>
+                  <p class="text-xs text-green-700">Send this code to @DIF_verify_bot</p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border-2 border-green-300">
+                <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Your Verification Code</p>
+                <p class="text-2xl font-mono font-bold text-black break-all">${code}</p>
+              </div>
+              <button 
+                onclick="navigator.clipboard.writeText('${code}')"
+                class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                </svg>
+                Copy Code
+              </button>
+            </div>
+          `;
+
+          // Start polling verification
+          startChecking(username);
+
+        })
+        .catch(err => {
+          console.error(err);
+          outputDiv.className = "mt-6 p-4 bg-red-50 border border-red-200 rounded-lg";
+          outputDiv.innerHTML = `
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <div>
+                <p class="text-sm text-red-900 font-semibold mb-1">Error Generating Code</p>
+                <p class="text-xs text-red-700">Please try again or contact support if the issue persists.</p>
+              </div>
+            </div>
+          `;
+        });
+    }
+
+  </script>
+
+</body>
+</html>
