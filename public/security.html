@@ -131,7 +131,7 @@
   <script type="module">
     import { db, uploadEncryptedFingerprint } from "./firebase-config.js";
     import {
-      ref, set
+      ref, set, get
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     const NGROK_URL = "https://dif-backend.onrender.com";
@@ -234,6 +234,7 @@
       // ✅ CHECK IF PASSKEY ALREADY EXISTS
       // -------------------------------
       const passkeyPath = ref(db, "passkeys/" + currentIdentity.username);
+      console.log("Passkey Firebase Response:", existing.val());
       const existing = await get(passkeyPath);
     
       if (existing.exists() && existing.val().status === "registered") {
@@ -354,4 +355,5 @@
 </body>
 
 </html>
+
 
